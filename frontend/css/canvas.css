@@ -1,0 +1,65 @@
+/* =========================================================
+   CompareX global canvas
+   Base layer for the entire product — Nothing-style dotted grid
+   ========================================================= */
+
+html {
+  background-color: var(--canvas-base);
+}
+
+body {
+  position: relative;
+  min-height: 100vh;
+  background: transparent;
+}
+
+/*
+  Layer A — warm charcoal gradient (behind dots)
+  Layer B — square dot matrix (above gradient, below UI)
+  Both are fixed so the texture never seams or restarts on scroll.
+*/
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Gradient + ambient glow */
+body::before {
+  z-index: -2;
+  background:
+    radial-gradient(ellipse 90% 70% at 18% 100%, var(--canvas-glow-b), transparent 58%),
+    radial-gradient(ellipse 70% 55% at 82% 12%, var(--canvas-glow-a), transparent 60%),
+    radial-gradient(ellipse 55% 40% at 55% 70%, var(--canvas-glow-c), transparent 65%),
+    linear-gradient(
+      165deg,
+      var(--canvas-base) 0%,
+      var(--canvas-mid) 38%,
+      #080808 72%,
+      var(--canvas-base) 100%
+    );
+}
+
+/* Square rounded-dot matrix — ~2.5px tiles on a 24px grid @ ~16% opacity */
+body::after {
+  z-index: -1;
+  background-image: var(--canvas-dot-image);
+  background-size: var(--canvas-gap) var(--canvas-gap);
+  background-repeat: repeat;
+  background-position: 0 0;
+  opacity: 1;
+}
+
+.site-shell {
+  position: relative;
+  z-index: 0;
+  background: transparent;
+}
+
+main,
+[data-discover-view],
+[data-category-stage] {
+  background: transparent;
+}

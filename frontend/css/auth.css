@@ -1,0 +1,335 @@
+/* CompareX OTP authentication modal */
+
+.auth-modal {
+  position: relative;
+  width: min(440px, 100%);
+  max-height: min(92vh, 720px);
+  overflow: auto;
+  background: #141414;
+  border: 1px solid rgba(255, 255, 255, .08);
+  border-radius: 24px;
+  box-shadow: 0 28px 80px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255, 122, 26, .06);
+  transform: translateY(16px) scale(.98);
+  transition: transform .28s var(--ease-out);
+}
+
+.modal-backdrop.is-open .auth-modal {
+  transform: none;
+}
+
+.auth-modal-close {
+  position: absolute;
+  z-index: 2;
+  top: 14px;
+  right: 14px;
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  color: var(--text);
+  background: rgba(255, 255, 255, .06);
+  border: 0;
+  border-radius: 10px;
+  font-size: 20px;
+}
+
+.auth-panel {
+  display: none;
+  padding: 40px 32px 28px;
+  animation: auth-panel-in .28s var(--ease-out);
+}
+
+.auth-panel.is-active {
+  display: block;
+}
+
+@keyframes auth-panel-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+
+.auth-brand {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 22px;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -.06em;
+}
+
+.auth-brand .brand-mark {
+  width: 24px;
+  height: 24px;
+  margin-right: 6px;
+  font-size: 20px;
+}
+
+.auth-panel h2 {
+  margin: 0 0 8px;
+  font-size: 26px;
+  letter-spacing: -.055em;
+}
+
+.auth-lead {
+  margin: 0 0 26px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.auth-method-list {
+  display: grid;
+  gap: 10px;
+}
+
+.auth-method {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 16px 16px;
+  color: var(--text);
+  background: rgba(255, 255, 255, .03);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  text-align: left;
+  transition: border-color .2s, background .2s, transform .2s;
+}
+
+.auth-method:hover {
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
+  background: rgba(255, 122, 26, .06);
+  transform: translateY(-1px);
+}
+
+.auth-method-icon {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  background: rgba(255, 122, 26, .12);
+  border-radius: 12px;
+  font-size: 18px;
+}
+
+.auth-method strong {
+  display: block;
+  font-size: 14px;
+  letter-spacing: -.02em;
+}
+
+.auth-method span {
+  display: block;
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.auth-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 18px;
+  padding: 0;
+  color: var(--muted);
+  background: transparent;
+  border: 0;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.auth-back:hover {
+  color: var(--accent);
+}
+
+.auth-field {
+  display: block;
+  margin-bottom: 16px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.auth-field-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.auth-prefix {
+  display: grid;
+  place-items: center;
+  min-width: 64px;
+  height: 48px;
+  color: var(--text);
+  background: rgba(255, 255, 255, .04);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.auth-field input {
+  display: block;
+  width: 100%;
+  height: 48px;
+  padding: 0 14px;
+  color: var(--text);
+  background: rgba(255, 255, 255, .04);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  outline: 0;
+  font-size: 14px;
+}
+
+.auth-field input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.auth-submit {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.auth-submit:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.auth-message {
+  min-height: 18px;
+  margin: 12px 0 0;
+  color: var(--accent);
+  font-size: 12px;
+  text-align: center;
+}
+
+.auth-message.is-error {
+  color: #ff7a7a;
+}
+
+.auth-message.is-success {
+  color: var(--success);
+}
+
+.auth-otp-boxes {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 8px 0 18px;
+}
+
+.auth-otp-boxes input {
+  width: 48px;
+  height: 56px;
+  color: var(--text);
+  background: rgba(255, 255, 255, .04);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  outline: 0;
+  font-size: 22px;
+  font-weight: 750;
+  text-align: center;
+}
+
+.auth-otp-boxes input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.auth-otp-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.auth-resend {
+  padding: 0;
+  color: var(--accent);
+  background: transparent;
+  border: 0;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.auth-resend:disabled {
+  color: var(--subtle);
+  cursor: not-allowed;
+}
+
+.auth-success {
+  text-align: center;
+  padding-top: 28px;
+  padding-bottom: 36px;
+}
+
+.auth-success-mark {
+  display: grid;
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 18px;
+  place-items: center;
+  color: #fff;
+  background: linear-gradient(145deg, #ff8a2b, #ff6510);
+  border-radius: 50%;
+  font-size: 32px;
+  box-shadow: 0 12px 30px rgba(255, 122, 26, .35);
+  animation: auth-pop .45s var(--ease-out);
+}
+
+@keyframes auth-pop {
+  0% { transform: scale(.6); opacity: 0; }
+  70% { transform: scale(1.08); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.account-trigger.is-user {
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.auth-user-menu {
+  position: relative;
+}
+
+.auth-logout-btn {
+  height: 38px;
+  margin-left: 4px;
+  padding: 0 12px;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.auth-logout-btn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+@media (max-width: 767px) {
+  .auth-modal {
+    width: min(100%, 100%);
+    border-radius: 20px;
+  }
+
+  .auth-panel {
+    padding: 34px 22px 22px;
+  }
+
+  .auth-otp-boxes input {
+    width: 42px;
+    height: 50px;
+    font-size: 18px;
+  }
+}

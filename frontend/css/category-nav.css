@@ -1,0 +1,244 @@
+/* Top category navigation — Blinkit / Amazon style strip */
+
+.category-nav {
+  position: sticky;
+  top: 92px;
+  z-index: 45;
+  margin-top: 100px;
+  background: color-mix(in srgb, var(--canvas-base) 55%, transparent);
+  border-block: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+  backdrop-filter: blur(14px);
+}
+
+.category-nav-inner {
+  position: relative;
+  width: min(var(--max-width), calc(100% - 64px));
+  margin-inline: auto;
+}
+
+.category-nav-track {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.category-nav-track::-webkit-scrollbar {
+  display: none;
+}
+
+.category-nav-item {
+  position: relative;
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 96px;
+  padding: 16px 12px 18px;
+  color: color-mix(in srgb, var(--text) 78%, transparent);
+  background: transparent;
+  border: 0;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color .28s var(--ease-out);
+}
+
+.category-nav-item svg {
+  width: 26px;
+  height: 26px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform .28s var(--ease-out), color .28s var(--ease-out);
+}
+
+.category-nav-item:hover {
+  color: var(--accent);
+}
+
+.category-nav-item:hover svg {
+  transform: scale(1.08);
+}
+
+.category-nav-item.is-active {
+  color: var(--accent);
+}
+
+.category-nav-item.is-active svg {
+  color: var(--accent);
+}
+
+.category-nav-item:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+  border-radius: 8px;
+}
+
+.category-nav-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 0;
+  background: var(--accent);
+  border-radius: 2px 2px 0 0;
+  pointer-events: none;
+  transition: left .28s var(--ease-out), width .28s var(--ease-out), opacity .28s var(--ease-out);
+  opacity: 0;
+}
+
+.category-nav-indicator.is-ready {
+  opacity: 1;
+}
+
+/* Home: strip sits under the fixed navbar */
+.category-nav--home {
+  margin-top: 86px;
+  top: 86px;
+}
+
+.site-shell:has(.category-nav--home) .hero--landing {
+  margin-top: 18px;
+  min-height: 580px;
+}
+
+/* Placeholder category panels */
+.category-browse {
+  padding: 48px 0 100px;
+}
+
+.category-panel {
+  display: none;
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.category-panel.is-active {
+  display: block;
+  animation: category-panel-in .28s var(--ease-out) forwards;
+}
+
+@keyframes category-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .category-nav-item,
+  .category-nav-item svg,
+  .category-nav-indicator,
+  .category-panel.is-active {
+    transition: none;
+    animation: none;
+  }
+
+  .category-panel.is-active {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.category-placeholder {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 56px 28px;
+  text-align: center;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.category-placeholder .eyebrow {
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.category-placeholder h1 {
+  margin: 0 0 12px;
+  font-size: clamp(28px, 4vw, 40px);
+  letter-spacing: -.06em;
+  line-height: 1.1;
+}
+
+.category-placeholder p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.category-placeholder-rule {
+  width: 48px;
+  height: 2px;
+  margin: 22px auto;
+  background: var(--accent);
+  border-radius: 2px;
+  opacity: .85;
+}
+
+@media (max-width: 1024px) {
+  .category-nav-item {
+    flex: 0 0 auto;
+    min-width: 104px;
+  }
+}
+
+@media (max-width: 767px) {
+  .category-nav {
+    top: 72px;
+    margin-top: 80px;
+  }
+
+  .category-nav--home {
+    margin-top: 72px;
+    top: 72px;
+  }
+
+  .site-shell:has(.category-nav--home) .hero--landing {
+    margin-top: 12px;
+  }
+
+  .category-nav-inner {
+    width: 100%;
+  }
+
+  .category-nav-track {
+    padding: 0 12px;
+  }
+
+  .category-nav-item {
+    min-width: 88px;
+    padding: 14px 10px 16px;
+    font-size: 11px;
+    gap: 6px;
+  }
+
+  .category-nav-item svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .category-browse {
+    padding: 32px 0 72px;
+  }
+
+  .category-placeholder {
+    padding: 40px 20px;
+  }
+}

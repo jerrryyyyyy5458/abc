@@ -1,0 +1,53 @@
+/* Design tokens shared across CompareX */
+:root {
+  --bg: #0a0a0a;
+  --surface: #171717;
+  --card: #1f1f1f;
+  --card-hover: #252525;
+  --border: #2a2a2a;
+  --muted: #929292;
+  --subtle: #666;
+  --text: #fff;
+  --accent: #ff7a1a;
+  --accent-strong: #ff6510;
+  --accent-soft: rgba(255, 122, 26, .14);
+  --success: #77d592;
+  --shadow: 0 24px 80px rgba(0, 0, 0, .36);
+  --brand-logo-filter: none;
+  --radius-sm: 12px;
+  --radius: 20px;
+  --radius-lg: 32px;
+  --max-width: 1240px;
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
+
+  /* Global canvas — Nothing-inspired dotted texture */
+  --canvas-base: #0b0b0b;
+  --canvas-mid: #14110f;
+  --canvas-gap: 24px;
+  --canvas-glow-a: rgba(255, 122, 26, .11);
+  --canvas-glow-b: rgba(120, 65, 28, .28);
+  --canvas-glow-c: rgba(255, 122, 26, .06);
+  /* 2.5px rounded squares, warm orange @ ~16% — encoded SVG tile */
+  --canvas-dot-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Crect x='0' y='0' width='2.5' height='2.5' rx='0.45' fill='%23ff8830' fill-opacity='0.16'/%3E%3C/svg%3E");
+}
+
+[data-theme="light"] {
+  --bg: #f4f2ef;
+  --surface: rgba(255, 255, 255, .86);
+  --card: #fff;
+  --card-hover: #fff;
+  --border: #e7e8eb;
+  --muted: #646a76;
+  --subtle: #9499a3;
+  --text: #111827;
+  --accent-soft: rgba(255, 122, 26, .1);
+  --shadow: 0 24px 80px rgba(25, 30, 40, .1);
+  --brand-logo-filter: invert(1);
+
+  --canvas-base: #f2efe9;
+  --canvas-mid: #e8e0d6;
+  --canvas-glow-a: rgba(255, 122, 26, .08);
+  --canvas-glow-b: rgba(180, 110, 50, .14);
+  --canvas-glow-c: rgba(255, 140, 60, .06);
+  --canvas-dot-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Crect x='0' y='0' width='2.5' height='2.5' rx='0.45' fill='%23c46a28' fill-opacity='0.18'/%3E%3C/svg%3E");
+}
