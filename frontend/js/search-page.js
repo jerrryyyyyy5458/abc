@@ -2,6 +2,7 @@
 import { api } from "./api.js?v=live5";
 import { formatPrice } from "./utils.js";
 import { initializeTheme } from "./theme.js";
+import { toggleWishlist, isWishlisted } from "./wishlist.js";
 import { recommendOffer, animateIntelligenceCounters } from "./intelligence.js?v=1";
 
 const form = document.querySelector("[data-results-form]");
@@ -903,12 +904,18 @@ async function performSearch(query, options = {}) {
 }
 
 grid?.addEventListener("click", (event) => {
-  const wishlist = event.target.closest("[data-wishlist-btn]");
-  if (wishlist) {
-    wishlist.classList.toggle("is-active");
-    wishlist.textContent = wishlist.classList.contains("is-active") ? "♥ Saved" : "♡ Wishlist";
-    return;
-  }
+  const wishlistButton = event.target.closest("[data-wishlist-btn]");
+
+if (wishlistButton) {
+  const productId = new URLSearchParams(window.location.search).get("id")
+  || searchQuery.trim().toLowerCase();
+  const isSaved = toggleWishlist(productId);
+
+  wishlistButton.classList.toggle("is-active", isSaved);
+  wishlistButton.textContent = isSaved ? "♥ Saved" : "♡ Wishlist";
+
+  return;
+}
   const share = event.target.closest("[data-share-btn]");
   if (share) {
     const shareUrl = window.location.href;

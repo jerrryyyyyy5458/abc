@@ -57,7 +57,7 @@
       </nav>
       <section class="account-content">
         <h2 data-account-title>Welcome to CompareX</h2>
-        <p data-account-copy>Sign in with mobile OTP or email OTP to save products and track prices.</p>
+        <p data-account-copy>Sign in with email OTP to save products and track prices.</p>
         <div class="account-details" data-account-details hidden>
           <div class="account-field"><span>Phone</span><strong data-profile-phone>—</strong></div>
           <div class="account-field"><span>Email</span><strong data-profile-email>—</strong></div>
@@ -74,8 +74,8 @@
   <script type="module">
     import { initializeTheme } from "../../js/theme.js";
     import { initializeNavigation } from "../../js/navbar.js";
-    import { initializeAuth, loadUser } from "../../js/auth.js?v=auth1";
-    import { api, getAuthToken, clearAuthToken } from "../../js/api.js?v=auth1";
+    import { initializeAuth, loadUser } from "../../js/auth.js?v=auth3";
+    import { api, getAuthToken, clearAuthToken } from "../../js/api.js?v=auth3";
 
     initializeTheme();
     initializeNavigation();
@@ -85,11 +85,11 @@
       const token = getAuthToken();
       const empty = document.querySelector("[data-account-empty]");
       const details = document.querySelector("[data-account-details]");
-      const logoutBtn = document.querySelector("[data-auth-logout]");
+      const logoutBtn = document.querySelector(".account-content [data-auth-logout]");
       if (!token) {
         details.hidden = true;
         empty.hidden = false;
-        logoutBtn.hidden = true;
+        if (logoutBtn) logoutBtn.hidden = true;
         return;
       }
       try {
@@ -101,17 +101,18 @@
         document.querySelector("[data-profile-id]").textContent = `#${user.id}`;
         details.hidden = false;
         empty.hidden = true;
-        logoutBtn.hidden = false;
+        if (logoutBtn) logoutBtn.hidden = false;
       } catch {
         clearAuthToken();
         details.hidden = true;
         empty.hidden = false;
-        logoutBtn.hidden = true;
+        if (logoutBtn) logoutBtn.hidden = true;
       }
     }
 
     renderAccount();
     window.addEventListener("storage", renderAccount);
+    window.addEventListener("comparex:auth-change", renderAccount);
   </script>
 </body>
 </html>

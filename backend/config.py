@@ -14,9 +14,16 @@ load_dotenv()  # also allow a parent/.env override when present
 class Config:
     SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL", "sqlite:///comparex.db")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY", "change-this-before-production")
+    JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY", "comparex-default-jwt-secret-key-32-bytes-min-change-in-prod")
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(days=7)
-    CORS_ORIGINS = os.getenv("CORS_ORIGINS", "http://127.0.0.1:5500,http://localhost:5500").split(",")
+    CORS_ORIGINS = [
+        origin.strip()
+        for origin in os.getenv(
+            "CORS_ORIGINS",
+            "http://127.0.0.1:5500,http://localhost:5500,http://127.0.0.1:8000,http://localhost:8000,http://127.0.0.1:8080,http://localhost:8080,http://127.0.0.1:3000,http://localhost:3000,http://127.0.0.1:5173,http://localhost:5173,http://127.0.0.1:5000,http://localhost:5000",
+        ).split(",")
+        if origin.strip()
+    ]
 
     # OTP delivery — missing live credentials auto-fall back to console (dev) mode
     SMS_PROVIDER = os.getenv("SMS_PROVIDER", "dev")  # dev | msg91 | twilio | auto | aws_sns

@@ -7,7 +7,7 @@ import { initializeCategoryNav } from "./category-nav.js";
 import { initializeCategoryBrowse } from "./category-browse.js";
 import { initializeWishlist } from "./wishlist.js";
 import { initializeCompare } from "./compare.js";
-import { initializeAuth } from "./auth.js?v=auth1";
+import { initializeAuth } from "./auth.js?v=auth3";
 import { MARKETPLACES, TRUSTED_STORES } from "./marketplace-data.js?v=trusted2";
 
 function renderProducts() {
